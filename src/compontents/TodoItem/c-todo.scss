@@ -1,0 +1,61 @@
+@import '../../styles/abstracts/index';
+
+$text-color: #fff;
+$text-color-dimmed: #626268;
+$text-line-scale: 0;
+$text-x: 0px;
+$border-default: #7f7f85;
+$border-hover: #e4e4e7;
+
+.c-todo-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  padding: pad(2xsmall) pad(xsmall);
+  width: px-to-rem(440px);
+  height: auto;
+  border-radius: 7px;
+  overflow: hidden;
+  transition: background 0.15s linear;
+  &:not(.done) {
+    &:hover {
+      background: #2c2c31;
+    }
+  }
+  &.done {
+    .c-todo-item__task {
+      color: $text-color-dimmed;
+      text-decoration: line-through;
+    }
+  }
+  &__task {
+    display: inline-block;
+    margin: 0 gap(small);
+    letter-spacing: -0.05px;
+    text-decoration: none;
+    color: $text-color;
+    position: relative;
+    transition: color 0.25s;
+    background-color: transparent;
+    border: 0;
+    max-width: 90%;
+    line-break: auto;
+    height: auto;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+// Center & dribbble
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #242428;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}

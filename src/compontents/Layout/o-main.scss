@@ -1,0 +1,19 @@
+@import '../../styles/abstracts/index';
+
+//
+// Main
+//
+
+.o-main {
+  @include make-grid-container($gutter: px-to-rem(32px));
+  @include make-grid-container-max-widths();
+
+  width: 100%;
+}
+
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
