@@ -2,10 +2,6 @@ import React from 'react';
 
 import Todo from './pages/todo';
 
-const App = () => (
-  <div className="App">
-    <Todo />
-  </div>
-);
+const App = () => <Todo />;
 
 export default App;

@@ -1,0 +1,171 @@
+@import '../../styles/abstracts/index';
+
+.c-todo-input {
+  --background: #fff;
+  --border-default: #d0d0df;
+  --border-active: #3d6df9;
+  --shadow-default: #{rgba(#202048, 0.12)};
+  --shadow-active: #{rgba(#3d6df9, 0.25)};
+  --text-color: #818190;
+  --placeholder-color: #c9c9d9;
+  --placeholder-color-hover: #babac9;
+  --close: #818190;
+  --close-light: #babac9;
+  --close-background: #f1f1fa;
+  --clear-x: 0px;
+  --clear-swipe-left: 0px;
+  --clear-swipe-x: 0;
+  --clear-swipe: 0px;
+  --clear-scale: 0;
+  --clear-rotate: 0deg;
+  --clear-opacity: 0;
+  --clear-arrow-o: 1;
+  --clear-arrow-x: 0px;
+  --clear-arrow-y: 0px;
+  --clear-arrow-offset: 4px;
+  --clear-arrow-offset-second: 4px;
+  --clear-line-array: 8.5px;
+  --clear-line-offset: 27px;
+  --clear-long-array: 8.5px;
+  --clear-long-offset: 24px;
+
+  position: relative;
+  display: flex;
+  width: px-to-rem(560px);
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto 2rem;
+  border-radius: 8px;
+  background: var(--background);
+  box-shadow: inset 0 0 0 var(--border-width, 1px) var(--border, var(--border-default)),
+    0 1px 3px var(--shadow, var(--shadow-default));
+  transition: box-shadow 0.2s;
+  &:focus-within {
+    --border-width: 1.5px;
+    --border: var(--border-active);
+    --shadow: var(--shadow-active);
+  }
+
+  &__todo {
+    display: flex;
+    flex-grow: 1;
+    input {
+      -webkit-appearance: none;
+      background: none;
+      border: none;
+      outline: none;
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 12px 16px;
+      line-height: 24px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-color);
+      &::placeholder {
+        color: var(--placeholder-color);
+        transition: color 0.2s;
+      }
+    }
+  }
+
+  &:hover {
+    .c-todo-input__todo {
+      input {
+        &::placeholder {
+          color: var(--placeholder-color-hover);
+          transition: color 0.2s;
+        }
+      }
+    }
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    padding: 4px pad(xsmall);
+    border-radius: 6px;
+    border: 0;
+    outline: 0;
+    margin-right: 8px;
+    line-height: 24px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    background: $g-border-color;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    svg {
+      font-size: 1rem;
+      margin-right: 4px;
+    }
+
+    &:hover {
+      background: $g-border-color-hover;
+    }
+  }
+
+  .clear {
+    position: relative;
+    outline: none;
+    z-index: 1;
+    padding: 0;
+    margin: 12px 12px 12px 0;
+    border: none;
+    background: var(--b, transparent);
+    transition: background 0.2s;
+    border-radius: 50%;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 12px;
+      background: var(--background);
+      transform-origin: 100% 50%;
+    }
+    svg {
+      display: block;
+      position: relative;
+      z-index: 1;
+      width: 24px;
+      height: 24px;
+      outline: none;
+      cursor: pointer;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke: var(--close);
+      path {
+        transition: stroke 0.2s;
+        &.arrow {
+          stroke: var(--clear-arrow-stroke, var(--close));
+          stroke-dasharray: 4px;
+          stroke-dashoffset: var(--clear-arrow-offset);
+          opacity: var(--clear-arrow-o);
+          transform: translate(var(--clear-arrow-x), var(--clear-arrow-y)) translateZ(0);
+          &:last-child {
+            stroke-dashoffset: var(--clear-arrow-offset-second);
+          }
+        }
+        &.line {
+          stroke-dasharray: var(--clear-line-array) 28.5px;
+          stroke-dashoffset: var(--clear-line-offset);
+        }
+        &.long {
+          stroke: var(--clear-arrow-stroke, var(--close));
+          stroke-dasharray: var(--clear-long-array) 15.5px;
+          stroke-dashoffset: var(--clear-long-offset);
+          opacity: var(--clear-arrow-o);
+          transform: translate(var(--clear-arrow-x), var(--clear-arrow-y)) translateZ(0);
+        }
+      }
+    }
+    &:hover {
+      --b: var(--close-background);
+    }
+  }
+}

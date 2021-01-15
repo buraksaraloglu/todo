@@ -18,7 +18,7 @@ const TodoItem = ({ className, checked, todo, onCheck, handleKeyDown }) => (
 
 TodoItem.propTypes = {
   className: PropTypes.string,
-  todo: PropTypes.string,
+  todo: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   onCheck: PropTypes.func.isRequired,
   handleKeyDown: PropTypes.func.isRequired,
@@ -26,7 +26,6 @@ TodoItem.propTypes = {
 
 TodoItem.defaultProps = {
   className: '',
-  todo: 'Default Todo',
 };
 
 export default TodoItem;
