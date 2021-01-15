@@ -1,31 +1,44 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React from 'react';
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { toggleTodo } from '../../redux/actions';
 
 import Checkbox from '../Checkbox';
 
 import './c-todo.scss';
 
-const TodoItem = ({ className, checked, todo, onCheck, handleKeyDown }) => (
-  <div className={cx('c-todo-item', className)}>
-    <Checkbox onCheck={onCheck} handleKeyDown={handleKeyDown} isChecked={checked} />
-    <span className="c-todo-item__task" role="listitem">
-      {todo}
-    </span>
-  </div>
-);
+const TodoItem = ({ todo, toggleTodo }) => {
+  const [checked, setChecked] = useState(false);
 
-TodoItem.propTypes = {
-  className: PropTypes.string,
-  todo: PropTypes.string.isRequired,
-  checked: PropTypes.bool.isRequired,
-  onCheck: PropTypes.func.isRequired,
-  handleKeyDown: PropTypes.func.isRequired,
+  const handleCheck = () => {
+    setChecked(!checked);
+  };
+
+  useEffect(() => {
+    const timer =
+      checked &&
+      setTimeout(() => {
+        toggleTodo(todo.id);
+      }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
+
+  return (
+    <div className={cx('c-todo-item', todo && (todo.completed || checked) && 'done')}>
+      <Checkbox onCheck={handleCheck} isChecked={checked} />
+      <span className="c-todo-item__task" role="listitem">
+        {todo.content}
+      </span>
+    </div>
+  );
 };
 
-TodoItem.defaultProps = {
-  className: '',
-};
-
-export default TodoItem;
+// export default Todo;
+export default connect(null, { toggleTodo })(TodoItem);

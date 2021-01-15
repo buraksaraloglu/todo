@@ -7,6 +7,11 @@ $text-x: 0px;
 $border-default: #7f7f85;
 $border-hover: #e4e4e7;
 
+.todo-list {
+  padding: 0;
+  color: $color-secondary;
+}
+
 .c-todo-item {
   position: relative;
   z-index: 1;

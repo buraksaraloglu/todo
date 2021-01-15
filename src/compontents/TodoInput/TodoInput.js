@@ -1,13 +1,24 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-
+import { connect } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
+import { addTodo } from '../../redux/actions';
+
 import './c-todo-input.scss';
 
-const TodoInput = () => {
+const TodoInput = (props) => {
   const [todoInput, setTodoInput] = useState('');
   const [resetVisible, setResetVisible] = useState(false);
 
-  // const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (todoInput) {
+      addTodo({ id: Math.floor(Math.random() * 1500), task: todoInput });
+      props.addTodo(todoInput);
+      setTodoInput('');
+    }
+  };
 
   const handleChange = (e) => {
     setTodoInput(e.target.value);
@@ -26,9 +37,14 @@ const TodoInput = () => {
   }, [todoInput]);
 
   return (
-    <form className="c-todo-input">
+    <form className="c-todo-input" onSubmit={handleSubmit}>
       <div className="c-todo-input__todo">
-        <input value={todoInput} onChange={handleChange} type="text" placeholder="Type your todo" />
+        <input
+          value={todoInput}
+          onChange={handleChange}
+          type="text"
+          placeholder="Type your todo..."
+        />
         {resetVisible && (
           <button type="button" className="clear" onClick={handleReset}>
             <svg viewBox="0 0 24 24">
@@ -40,7 +56,12 @@ const TodoInput = () => {
           </button>
         )}
       </div>
-      <button className="c-todo-input__submit" aria-roledescription="Add Todo" type="button">
+      <button
+        className="c-todo-input__submit"
+        aria-roledescription="Add Todo"
+        type="button"
+        onClick={handleSubmit}
+      >
         <BsPlus />
         Add Todo
       </button>
@@ -48,4 +69,4 @@ const TodoInput = () => {
   );
 };
 
-export default TodoInput;
+export default connect(null, { addTodo })(TodoInput);

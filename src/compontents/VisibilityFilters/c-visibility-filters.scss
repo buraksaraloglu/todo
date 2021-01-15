@@ -1,0 +1,16 @@
+@import '../../styles/abstracts/index';
+
+.c-visibility-filters {
+  display: flex;
+  justify-content: space-evenly;
+  color: color-palette('gray', 400);
+  transition: all 0.2s ease;
+  .filter {
+    cursor: pointer;
+
+    &:hover,
+    &__active {
+      color: color-palette('gray', 100);
+    }
+  }
+}

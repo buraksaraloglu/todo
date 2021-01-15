@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 import './c-checkbox.scss';
 
-const Checkbox = ({ onCheck, isChecked, handleKeyDown }) => (
+const Checkbox = ({ onCheck, isChecked }) => (
   <label className="checkbox">
-    <input type="checkbox" onClick={onCheck} onKeyDown={handleKeyDown} aria-checked={isChecked} />
+    <input type="checkbox" onClick={onCheck} aria-checked={isChecked} />
     <svg viewBox="0 0 21 18">
       <symbol id="tick-path" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -41,7 +41,6 @@ const Checkbox = ({ onCheck, isChecked, handleKeyDown }) => (
 Checkbox.propTypes = {
   isChecked: PropTypes.bool.isRequired,
   onCheck: PropTypes.func.isRequired,
-  handleKeyDown: PropTypes.func.isRequired,
 };
 
 export default Checkbox;
