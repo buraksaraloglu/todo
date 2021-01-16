@@ -21,10 +21,7 @@
     "eslint": "^7.11.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.1.0",
-    "husky": "^5.0.6",
-    "lint-staged": "^10.5.3",
     "node-sass": "^4.0.0",
-    "pinst": "^2.1.1",
     "prettier": "2.2.1",
     "stylelint": "^13.2.1",
     "stylelint-config-prettier": "^8.0.1",
@@ -34,10 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "husky install",
-    "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [
@@ -50,16 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown",
-    "*.js": "eslint --cache --fix",
-    "*.css": "stylelint --fix",
-    "*.{js,css,md}": "prettier --write"
   }
 }
