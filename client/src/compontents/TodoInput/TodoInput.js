@@ -14,7 +14,7 @@ const TodoInput = (props) => {
     e.preventDefault();
 
     if (todoInput) {
-      addTodo({ id: Math.floor(Math.random() * 1500), task: todoInput });
+      // addTodo({ id: Math.floor(Math.random() * 1500), task: todoInput });
       props.addTodo(todoInput);
       setTodoInput('');
     }

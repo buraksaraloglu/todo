@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const todoSchema = new mongoose.Schema({
-  id: Number,
   content: String,
   completed: {
+    id: Number,
     type: Boolean,
     default: false,
   },

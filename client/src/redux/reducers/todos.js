@@ -1,4 +1,8 @@
-import { ADD_TODO, TOGGLE_TODO } from '../actionTypes';
+/* eslint-disable no-return-assign */
+/* eslint-disable no-underscore-dangle */
+import { ADD_TODO, FETCH_TODOS_SUCCESS, TOGGLE_TODO } from '../actionTypes';
+
+import getIds from '../../utils/getIds';
 
 const initialState = {
   allIds: [],
@@ -22,6 +26,24 @@ export default function (state = initialState, action) {
         },
       };
     }
+
+    case FETCH_TODOS_SUCCESS: {
+      const { content } = action.payload;
+      const ids = getIds(content);
+      const todosMap = {};
+      content.map(
+        (todo) =>
+          (todosMap[todo._id] = {
+            ...todo,
+          }),
+      );
+
+      return {
+        allIds: ids,
+        byIds: todosMap,
+      };
+    }
+
     case TOGGLE_TODO: {
       const { id } = action.payload;
       return {
