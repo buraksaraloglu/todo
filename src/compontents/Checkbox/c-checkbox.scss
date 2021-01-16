@@ -9,7 +9,6 @@
   width: 20px;
   height: 20px;
   margin-top: 3.8px;
-  cursor: pointer;
   position: relative;
   -webkit-tap-highlight-color: transparent;
   svg {
@@ -29,12 +28,14 @@
     box-shadow: inset 0 0 0 1.5px var(--border, var(--border-default));
     background: var(--background, transparent);
     transition: background 0.25s linear, box-shadow 0.25s linear;
+    cursor: pointer;
     & + svg {
       width: 21px;
       height: 18px;
       left: 4px;
       top: 0;
       color: var(--active);
+      cursor: pointer;
       .tick {
         stroke-dasharray: 20;
         stroke-dashoffset: var(--stroke-dashoffset, 20);

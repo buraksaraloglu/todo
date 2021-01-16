@@ -2,9 +2,10 @@
 
 .c-visibility-filters {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   color: color-palette('gray', 400);
   transition: all 0.2s ease;
+
   .filter {
     cursor: pointer;
 
