@@ -11,28 +11,31 @@ import Checkbox from '../Checkbox';
 import './c-todo.scss';
 
 const TodoItem = ({ todo, toggleTodo }) => {
-  const [checked, setChecked] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [completed, setCompleted] = useState(todo.completed);
 
   const handleCheck = () => {
-    setChecked(!checked);
+    setToggle(!toggle);
+    setCompleted(!completed);
   };
 
   useEffect(() => {
     const timer =
-      checked &&
+      toggle &&
       setTimeout(() => {
         toggleTodo(todo.id);
-      }, 500);
+        setToggle(false);
+      }, 700);
 
     return () => {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checked]);
+  }, [toggle]);
 
   return (
-    <div className={cx('c-todo-item', todo && (todo.completed || checked) && 'done')}>
-      <Checkbox onCheck={handleCheck} isChecked={checked} />
+    <div className={cx('c-todo-item', todo && completed && 'done')}>
+      <Checkbox onCheck={handleCheck} isChecked={completed} />
       <span className="c-todo-item__task" role="listitem">
         {todo.content}
       </span>

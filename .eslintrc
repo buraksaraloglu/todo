@@ -2,6 +2,7 @@
   "extends": ["react-app", "react-app/jest", "airbnb", "prettier", "prettier/react"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "*.test.js"] }],
+    "no-plusplus": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
