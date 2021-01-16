@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import shortid from 'shortid';
+
 import { connect } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
 import { addTodo } from '../../redux/actions';
@@ -13,9 +16,16 @@ const TodoInput = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const currentId = shortid.generate();
+
     if (todoInput) {
-      // addTodo({ id: Math.floor(Math.random() * 1500), task: todoInput });
-      props.addTodo(todoInput);
+      props.addTodo({ id: currentId, content: todoInput });
+
+      // make this thunk
+      axios
+        .post('/api/addTodo', { id: currentId, content: todoInput })
+        .then((res) => res.data)
+        .catch((error) => new Error(error));
       setTodoInput('');
     }
   };

@@ -8,20 +8,17 @@ import VisibilityFilters from '../compontents/VisibilityFilters';
 
 import TodoItem from '../compontents/TodoItem/TodoItem';
 
-const TodoContainer = ({ todos }) => {
-  console.log(todos);
-  return (
-    <>
-      <TodoInput />
-      <VisibilityFilters />
-      <ul className="todo-list">
-        {todos && todos.length
-          ? todos.map((todo) => <TodoItem key={`todo-${todo.id}`} todo={todo} />)
-          : '🎉 No todos, yay'}
-      </ul>
-    </>
-  );
-};
+const TodoContainer = ({ todos }) => (
+  <>
+    <TodoInput />
+    <VisibilityFilters />
+    <ul className="todo-list">
+      {todos && todos.length
+        ? todos.map((todo) => <TodoItem key={`todo-${todo.id}`} todo={todo} />)
+        : '🎉 No todos, yay'}
+    </ul>
+  </>
+);
 
 const mapStateToProps = (state) => {
   const { visibilityFilter } = state;

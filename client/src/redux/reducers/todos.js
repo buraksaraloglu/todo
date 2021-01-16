@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
       const todosMap = {};
       content.map(
         (todo) =>
-          (todosMap[todo._id] = {
+          (todosMap[todo.id] = {
             ...todo,
           }),
       );

@@ -1,17 +1,13 @@
 import axios from 'axios';
 import { ADD_TODO, FETCH_TODOS_SUCCESS, TOGGLE_TODO, SET_FILTER } from './actionTypes';
 
-let nextTodoId = 0;
-
 export const addTodo = (content) => ({
   type: ADD_TODO,
   payload: {
-    id: ++nextTodoId,
-    content,
+    ...content,
   },
 });
 
-// eslint-disable-next-line no-unused-vars
 const fetchTodosSuccess = (content) => ({
   type: FETCH_TODOS_SUCCESS,
   payload: {
@@ -26,7 +22,6 @@ export const toggleTodo = (id) => ({
 
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: { filter } });
 
-// eslint-disable-next-line no-unused-vars
 export const fetchTodos = () => (dispatch) => {
   try {
     axios
