@@ -2,6 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "author": "Burak Saraloglu",
   "dependencies": {
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
