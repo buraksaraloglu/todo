@@ -18,7 +18,7 @@ const TodoInput = ({ addTodo }) => {
 
     if (todoInput) {
       axios
-        .post('/api/v1/todos', { content: todoInput })
+        .post('https://bs-todo-server.herokuapp.com/api/v1/todos/', { content: todoInput })
         .then((res) => {
           const itemId = res.data._id;
           addTodo({ ...res.data, id: itemId });
