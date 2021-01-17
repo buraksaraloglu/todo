@@ -17,9 +17,6 @@ describe('GET /', () => {
     request(app)
       .get('/')
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200, {
-        message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
-      }, done);
+      .expect(302, '', done);
   });
 });
