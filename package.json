@@ -47,5 +47,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:6565"
+  "proxy": "https://bs-todo-server.herokuapp.com/"
 }
