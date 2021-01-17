@@ -1,0 +1,26 @@
+{
+  "name": "buraksaraloglu-todo",
+  "version": "0.1.0",
+  "description": "buraksaraloglu-todo",
+  "main": "./server/index.js",
+  "engines": {
+    "node": "10.x"
+  },
+  "scripts": {
+    "preinstall": "cd client && npm install && npm run build",
+    "install": "cd server && npm install",
+    "start": "cd server && npm run start",
+    "postinstall": "npm run start",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buraksaraloglu/todo.git"
+  },
+  "author": "Burak Saraloglu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buraksaraloglu/todo/issues"
+  },
+  "homepage": "https://github.com/buraksaraloglu/todo#readme"
+}
