@@ -1,7 +1,7 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
@@ -9,7 +9,6 @@ import { addTodo } from '../../redux/actions';
 
 import './c-todo-input.scss';
 
-// eslint-disable-next-line no-shadow
 const TodoInput = ({ addTodo }) => {
   const [todoInput, setTodoInput] = useState('');
   const [resetVisible, setResetVisible] = useState(false);
@@ -18,11 +17,9 @@ const TodoInput = ({ addTodo }) => {
     e.preventDefault();
 
     if (todoInput) {
-      // make this thunk
       axios
         .post('/api/v1/todos', { content: todoInput })
         .then((res) => {
-          // eslint-disable-next-line no-unused-vars
           const itemId = res.data._id;
           addTodo({ ...res.data, id: itemId });
         })
@@ -78,6 +75,10 @@ const TodoInput = ({ addTodo }) => {
       </button>
     </form>
   );
+};
+
+TodoInput.propTypes = {
+  addTodo: PropTypes.func.isRequired,
 };
 
 export default connect(null, { addTodo })(TodoInput);

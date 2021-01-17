@@ -1,12 +1,13 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-shadow */
-/* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import cx from 'classnames';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { toggleTodo, deleteTodo } from '../../redux/actions';
+
+import useUpdateTodo from '../../hooks/useUpdateTodo';
+import useDeleteTodo from '../../hooks/useDeleteTodo';
 
 import Checkbox from '../Checkbox';
 import DeleteButton from '../DeleteButton';
@@ -26,29 +27,8 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo }) => {
     setStatus('delete');
   };
 
-  useEffect(() => {
-    const timer =
-      status === 'update' &&
-      setTimeout(() => {
-        axios
-          .put(`/api/v1/todos/${todo.id}`, { ...todo, completed })
-          .then(() => {
-            toggleTodo(todo.id);
-          })
-          .catch(() => setStatus(null));
-        setStatus(null);
-      }, 300);
-
-    if (status === 'delete') {
-      axios.delete(`/api/v1/todos/${todo.id}`).then(() => deleteTodo(todo.id));
-
-      setStatus(null);
-    }
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [completed, deleteTodo, status, todo, toggleTodo]);
+  useUpdateTodo(todo, completed, status, setStatus, toggleTodo);
+  useDeleteTodo(todo, completed, status, setStatus, deleteTodo);
 
   return (
     <div className={cx('c-todo-item', todo && completed && 'done')}>
@@ -59,6 +39,19 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo }) => {
       <DeleteButton onDelete={handleDelete} />
     </div>
   );
+};
+
+TodoItem.propTypes = {
+  todo: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  }),
+  toggleTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+};
+
+TodoItem.defaultProps = {
+  todo: {},
 };
 
 // export default Todo;

@@ -1,9 +1,8 @@
 /* eslint-disable no-shadow */
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { setFilter } from '../../redux/actions';
 import VISIBILITY_FILTERS from '../../constants';
@@ -18,9 +17,16 @@ const VisibilityFilters = ({ activeFilter, setFilter }) => (
         <span
           key={`visibility-filter-${currentFilter}`}
           className={cx('filter', currentFilter === activeFilter && 'filter__active')}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              setFilter(currentFilter);
+            }
+          }}
           onClick={() => {
             setFilter(currentFilter);
           }}
+          role="button"
+          tabIndex={0}
         >
           {currentFilter}
         </span>
@@ -28,6 +34,11 @@ const VisibilityFilters = ({ activeFilter, setFilter }) => (
     })}
   </div>
 );
+
+VisibilityFilters.propTypes = {
+  activeFilter: PropTypes.string.isRequired,
+  setFilter: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({ activeFilter: state.visibilityFilter });
 

@@ -1,26 +1,25 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 
-import { toggleTodo } from '../redux/actions';
-
-const useUpdateTodo = ({ todo, status }) => {
+const useUpdateTodo = (todo, completed, status, setStatus, toggleTodo) => {
   useEffect(() => {
     const timer =
       todo &&
+      status === 'update' &&
       setTimeout(() => {
         axios
-          .put(`/api/v1/todos/${todo.id}`, { ...todo, status })
+          .put(`/api/v1/todos/${todo.id}`, { ...todo, completed })
           .then(() => {
             toggleTodo(todo.id);
           })
-          .catch(() => null);
-        return null;
+          .catch(() => setStatus(null));
+        setStatus(null);
       }, 300);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [status, todo]);
+  }, [completed, setStatus, status, todo, toggleTodo]);
 };
 
 export default useUpdateTodo;
