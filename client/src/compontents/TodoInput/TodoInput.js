@@ -23,7 +23,7 @@ const TodoInput = (props) => {
 
       // make this thunk
       axios
-        .post('/api/addTodo', { id: currentId, content: todoInput })
+        .post('/api/v1/todos', { id: currentId, content: todoInput })
         .then((res) => res.data)
         .catch((error) => new Error(error));
       setTodoInput('');

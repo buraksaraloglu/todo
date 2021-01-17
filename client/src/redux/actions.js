@@ -25,7 +25,7 @@ export const setFilter = (filter) => ({ type: SET_FILTER, payload: { filter } })
 export const fetchTodos = () => (dispatch) => {
   try {
     axios
-      .get('/api/getTodos')
+      .get('/api/v1/todos')
       .then((res) => dispatch(fetchTodosSuccess(res.data)))
       .catch((err) => new Error(err));
   } catch (e) {
