@@ -1,7 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import shortid from 'shortid';
 
 import { connect } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
@@ -9,22 +9,23 @@ import { addTodo } from '../../redux/actions';
 
 import './c-todo-input.scss';
 
-const TodoInput = (props) => {
+// eslint-disable-next-line no-shadow
+const TodoInput = ({ addTodo }) => {
   const [todoInput, setTodoInput] = useState('');
   const [resetVisible, setResetVisible] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const currentId = shortid.generate();
-
     if (todoInput) {
-      props.addTodo({ id: currentId, content: todoInput });
-
       // make this thunk
       axios
-        .post('/api/v1/todos', { id: currentId, content: todoInput })
-        .then((res) => res.data)
+        .post('/api/v1/todos', { content: todoInput })
+        .then((res) => {
+          // eslint-disable-next-line no-unused-vars
+          const itemId = res.data._id;
+          addTodo({ ...res.data, id: itemId });
+        })
         .catch((error) => new Error(error));
       setTodoInput('');
     }

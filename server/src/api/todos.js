@@ -30,9 +30,9 @@ let cacheTime;
 
 // Get all todos
 router.get('/', limiter, speedLimiter, async (req, res, next) => {
-  if (cacheTime && cacheTime > Date.now() - desiredCacheTime) {
-    return res.json(cachedData);
-  }
+  // if (cacheTime && cacheTime > Date.now() - desiredCacheTime) {
+  //   return res.json(cachedData);
+  // }
 
   try {
     await Todo.find().then((todo) => {
@@ -49,9 +49,8 @@ router.get('/', limiter, speedLimiter, async (req, res, next) => {
 // Add one todo
 router.post('/', limiter, speedLimiter, async (req, res, next) => {
   try {
-    const { id, content, completed } = req.body;
+    const { content, completed } = req.body;
     const todo = {
-      id,
       content,
       completed,
       createdAt: Date.now(),
