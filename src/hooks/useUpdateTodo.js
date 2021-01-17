@@ -8,7 +8,10 @@ const useUpdateTodo = (todo, completed, status, setStatus, toggleTodo) => {
       status === 'update' &&
       setTimeout(() => {
         axios
-          .put(`/api/v1/todos/${todo.id}`, { ...todo, completed })
+          .put(`https://bs-todo-server.herokuapp.com/api/v1/todos/${todo.id}`, {
+            ...todo,
+            completed,
+          })
           .then(() => {
             toggleTodo(todo.id);
           })

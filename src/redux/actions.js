@@ -30,7 +30,7 @@ const fetchTodosSuccess = (content) => ({
 export const fetchTodos = () => async (dispatch) => {
   try {
     const statusPromise = await axios
-      .get('/api/v1/todos')
+      .get('https://bs-todo-server.herokuapp.com/api/v1/todos')
       .then((res) => {
         dispatch(fetchTodosSuccess(res.data));
         return 'resolved';
