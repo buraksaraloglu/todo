@@ -8,6 +8,8 @@ const todoSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  createdAt: Date,
+  updatedAt: Date,
 });
 
 // eslint-disable-next-line no-multi-assign

@@ -1,3 +1,7 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable array-callback-return */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable consistent-return */
 const express = require('express');
 const rateLimit = require('express-rate-limit');
@@ -24,6 +28,7 @@ const speedLimiter = slowDown({
 let cachedData;
 let cacheTime;
 
+// Get all todos
 router.get('/', limiter, speedLimiter, async (req, res, next) => {
   if (cacheTime && cacheTime > Date.now() - desiredCacheTime) {
     return res.json(cachedData);
@@ -41,21 +46,71 @@ router.get('/', limiter, speedLimiter, async (req, res, next) => {
   }
 });
 
-router.post('/', limiter, speedLimiter, async (req, res) => {
-  const { id, content, completed } = req.body;
-  const todo = {
-    id,
-    content,
-    completed,
-  };
+// Add one todo
+router.post('/', limiter, speedLimiter, async (req, res, next) => {
+  try {
+    const { id, content, completed } = req.body;
+    const todo = {
+      id,
+      content,
+      completed,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
 
-  const todoModal = new Todo(todo);
-  await todoModal.save();
+    const todoModal = new Todo(todo);
+    await todoModal.save();
 
-  if (cachedData) {
-    cachedData.push(todoModal);
+    if (cachedData) {
+      cachedData.push(todoModal);
+    }
+    res.json(todoModal);
+  } catch (err) {
+    next(err);
   }
-  res.json(todoModal);
+});
+
+// Update one todo
+router.put('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const todo = {
+      ...req.body,
+      updatedAt: Date.now(),
+    };
+
+    await Todo.findByIdAndUpdate({ _id: id }, todo).then(
+      (response) =>
+        cachedData &&
+        cachedData.map((todoItem) => {
+          if (todoItem._id === id) {
+            todoItem = response;
+          }
+        })
+    );
+    res.json(todo);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Delete one todo
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Todo.findByIdAndDelete(id, (err) => {
+      if (err) next(err);
+    });
+    cachedData &&
+      cachedData.map((todoItem, index) => {
+        if (todoItem._id === id) {
+          cachedData.splice(index, 1);
+        }
+      });
+    res.sendStatus(200);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
