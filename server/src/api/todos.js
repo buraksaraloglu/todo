@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const slowDown = require('express-slow-down');
@@ -19,6 +20,7 @@ const speedLimiter = slowDown({
   delayMs: 500, // begin adding 500ms of delay per request above 100:
 });
 
+// In memory cache. This could be changed with Redis or Memcached or some other cache layer
 let cachedData;
 let cacheTime;
 
@@ -49,6 +51,10 @@ router.post('/', limiter, speedLimiter, async (req, res) => {
 
   const todoModal = new Todo(todo);
   await todoModal.save();
+
+  if (cachedData) {
+    cachedData.push(todoModal);
+  }
   res.json(todoModal);
 });
 
