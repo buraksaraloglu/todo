@@ -1,45 +1,11 @@
-# Express API Starter
+## Todo App - Backend
 
-Includes API Server utilities:
+It's a todo app server built with Express.
 
-* [morgan](https://www.npmjs.com/package/morgan)
-  * HTTP request logger middleware for node.js
-* [helmet](https://www.npmjs.com/package/helmet)
-  * Helmet helps you secure your Express apps by setting various HTTP headers. It's not a silver bullet, but it can help!
-* [dotenv](https://www.npmjs.com/package/dotenv)
-  * Dotenv is a zero-dependency module that loads environment variables from a `.env` file into `process.env`
+### Important Specs
 
-Development utilities:
+> These specs are additions to CRUD operations.
 
-* [nodemon](https://www.npmjs.com/package/nodemon)
-  * nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
-* [eslint](https://www.npmjs.com/package/eslint)
-  * ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
-* [mocha](https://www.npmjs.com/package/mocha)
-  * ☕️ Simple, flexible, fun JavaScript test framework for Node.js & The Browser ☕️
-* [supertest](https://www.npmjs.com/package/supertest)
-  * HTTP assertions made easy via superagent.
-
-## Setup
-
-```
-npm install
-```
-
-## Lint
-
-```
-npm run lint
-```
-
-## Test
-
-```
-npm run test
-```
-
-## Development
-
-```
-npm run dev
-```
+- Made an in-memory cache that has 30 seconds of lifespan. After each `post`, `put` or `delete` request, cache's lifespan resets. That way, API response times reduced are down to ~5ms. _(if cache is available.)_
+- Built a rate-limit middleware using `express-rate-limit`. Any client makes _100 requests per 30 seconds_, gets temporary IP ban.
+- Built a rate-limit middleware using `express-slow-down`. After _50 requests in 30 seconds_, each request's response time gets slower +500ms.
