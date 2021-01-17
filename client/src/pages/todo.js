@@ -7,9 +7,11 @@ import TodoContainer from '../containers/Todo';
 
 const Todo = () => (
   <Layout>
-    <TodoInput />
-    <VisibilityFilters />
-    <TodoContainer />
+    <div className="c-todo-container">
+      <TodoInput />
+      <VisibilityFilters />
+      <TodoContainer />
+    </div>
   </Layout>
 );
 

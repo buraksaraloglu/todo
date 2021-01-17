@@ -1,6 +1,25 @@
 @import '../../styles/abstracts/index';
 
 .c-delete-button {
+  display: none;
+  align-items: center;
   margin-left: auto;
+  color: color-palette('gray', 400);
+  transition: color 0.2s ease;
+  padding: 0 8px;
   cursor: pointer;
+  span {
+    margin-left: 4px;
+  }
+  &:hover {
+    color: color-palette('gray', 100);
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 4px;
+
+    span {
+      display: none;
+    }
+  }
 }

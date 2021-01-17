@@ -1,29 +1,35 @@
 @import '../../styles/abstracts/index';
 
+// Center
+body {
+  align-items: center;
+  background: #242428;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
 //
 // Main
 //
 
 .o-main {
-  @include make-grid-container($gutter: px-to-rem(32px));
   @include make-grid-container-max-widths();
+  @include make-grid-container($gutter: px-to-rem(64px));
 
+  display: flex;
+  margin-top: 10rem;
+
+  @include media-breakpoint-up(lg) {
+    max-width: px-to-rem(880px);
+  }
+  @include media-breakpoint-down(sm) {
+    margin-top: 3rem;
+  }
+}
+
+.c-todo-container {
   width: 100%;
-}
-
-.home-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-// Center
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #242428;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  height: auto;
+  padding: 1rem 2rem;
+  background: #202024;
+  border-radius: 10px;
 }

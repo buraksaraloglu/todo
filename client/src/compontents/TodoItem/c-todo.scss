@@ -16,9 +16,10 @@ $border-hover: #e4e4e7;
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: flex-start;
+  flex-basis: 1;
+  align-items: center;
   padding: pad(2xsmall) pad(xsmall);
-  width: px-to-rem(560px);
+  width: inherit;
   height: auto;
   margin: 0 auto;
   border-radius: 7px;
@@ -35,6 +36,13 @@ $border-hover: #e4e4e7;
       text-decoration: line-through;
     }
   }
+
+  &:hover {
+    .c-delete-button {
+      display: flex;
+    }
+  }
+
   &__task {
     display: inline-block;
     margin: 0 gap(small);

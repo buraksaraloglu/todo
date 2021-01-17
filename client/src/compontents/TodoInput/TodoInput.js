@@ -71,7 +71,7 @@ const TodoInput = ({ addTodo }) => {
         onClick={handleSubmit}
       >
         <BsPlus />
-        Add Todo
+        <span>Add Todo</span>
       </button>
     </form>
   );

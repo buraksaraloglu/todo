@@ -31,7 +31,7 @@
 
   position: relative;
   display: flex;
-  width: px-to-rem(560px);
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   margin: 2rem auto;
@@ -99,11 +99,24 @@
 
     svg {
       font-size: 1rem;
-      margin-right: 4px;
+    }
+    span {
+      margin-left: 4px;
     }
 
     &:hover {
       background: $g-border-color-hover;
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding: 4px;
+      svg {
+        font-size: 1.6rem;
+      }
+
+      span {
+        display: none;
+      }
     }
   }
 
