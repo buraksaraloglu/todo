@@ -3,7 +3,7 @@ const getIds = (list) => {
   const ids = [];
 
   list.forEach((item) => {
-    ids.push(item.id);
+    ids.push(item._id);
   });
 
   return ids;

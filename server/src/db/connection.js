@@ -9,7 +9,7 @@ const connectDB = () => {
     .connect(URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
     })
     // eslint-disable-next-line no-console
     .then(console.log('db connected'))

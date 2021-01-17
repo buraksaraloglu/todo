@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { toggleTodo } from '../../redux/actions';
@@ -24,7 +25,12 @@ const TodoItem = ({ todo, toggleTodo }) => {
     const timer =
       toggle &&
       setTimeout(() => {
-        toggleTodo(todo.id);
+        axios
+          .put(`/api/v1/todos/${todo._id}`, { ...todo, completed })
+          .then(() => {
+            toggleTodo(todo._id);
+          })
+          .catch((error) => new Error(error));
         setToggle(false);
       }, 700);
 

@@ -63,6 +63,7 @@ router.post('/', limiter, speedLimiter, async (req, res, next) => {
 
     if (cachedData) {
       cachedData.push(todoModal);
+      cacheTime = Date.now();
     }
     res.json(todoModal);
   } catch (err) {
@@ -79,16 +80,15 @@ router.put('/:id', async (req, res, next) => {
       updatedAt: Date.now(),
     };
 
-    await Todo.findByIdAndUpdate({ _id: id }, todo).then(
-      (response) =>
-        cachedData &&
-        cachedData.map((todoItem) => {
-          if (todoItem._id === id) {
-            todoItem = response;
-          }
-        })
-    );
-    res.json(todo);
+    await Todo.findByIdAndUpdate(id, todo);
+    cachedData &&
+      cachedData.map((todoItem, index) => {
+        if (todoItem.id === id) {
+          cachedData[index] = { ...todo };
+          cacheTime = Date.now();
+        }
+      });
+    return res.json(todo);
   } catch (err) {
     next(err);
   }
@@ -105,6 +105,7 @@ router.delete('/:id', async (req, res, next) => {
       cachedData.map((todoItem, index) => {
         if (todoItem._id === id) {
           cachedData.splice(index, 1);
+          cacheTime = Date.now();
         }
       });
     res.sendStatus(200);

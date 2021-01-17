@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-underscore-dangle */
 import { ADD_TODO, FETCH_TODOS_SUCCESS, TOGGLE_TODO } from '../actionTypes';
@@ -33,7 +34,7 @@ export default function (state = initialState, action) {
       const todosMap = {};
       content.map(
         (todo) =>
-          (todosMap[todo.id] = {
+          (todosMap[todo._id] = {
             ...todo,
           }),
       );
