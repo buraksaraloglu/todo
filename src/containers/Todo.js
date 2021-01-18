@@ -5,6 +5,7 @@ import { getTodosByVisibilityFilter } from '../redux/selectors';
 import store from '../redux/store';
 import { fetchTodos } from '../redux/actions';
 
+// eslint-disable-next-line no-unused-vars
 import TodoItem from '../compontents/TodoItem/TodoItem';
 import Loading from '../compontents/Loading';
 
@@ -20,11 +21,12 @@ const TodoContainer = ({ todos }) => {
   if (status === 'loading') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem' }}>
-        <h3 style={{ color: '#bdbdbd', marginBottom: '1rem' }}>Loading</h3>
+        <h3 style={{ color: '#bdbdbd', margin: '0 auto 1rem' }}>Loading</h3>
         <Loading />
       </div>
     );
   }
+
   if (status === 'resolved') {
     return (
       <ul className="todo-list">
