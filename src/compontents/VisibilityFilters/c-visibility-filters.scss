@@ -3,15 +3,23 @@
 .c-visibility-filters {
   display: flex;
   justify-content: space-around;
-  color: color-palette('gray', 400);
+  color: color-palette('gray', 500);
+  font-weight: 400;
   transition: all 0.2s ease;
 
   .filter {
     cursor: pointer;
+    &:focus {
+      outline: 0;
+    }
 
     &:hover,
     &__active {
       color: color-palette('gray', 100);
+    }
+
+    &__active {
+      font-weight: 500;
     }
   }
 }

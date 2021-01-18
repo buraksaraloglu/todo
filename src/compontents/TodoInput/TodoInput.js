@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -12,9 +13,15 @@ import './c-todo-input.scss';
 const TodoInput = ({ addTodo }) => {
   const [todoInput, setTodoInput] = useState('');
   const [resetVisible, setResetVisible] = useState(false);
+  const [error, setError] = useState(false);
+  const [className, setClassName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!todoInput) {
+      setError(true);
+      setClassName('warn');
+    }
 
     if (todoInput) {
       axios
@@ -29,6 +36,8 @@ const TodoInput = ({ addTodo }) => {
   };
 
   const handleChange = (e) => {
+    setError(false);
+    setClassName('');
     setTodoInput(e.target.value);
   };
 
@@ -45,35 +54,38 @@ const TodoInput = ({ addTodo }) => {
   }, [todoInput]);
 
   return (
-    <form className="c-todo-input" onSubmit={handleSubmit}>
-      <div className="c-todo-input__todo">
-        <input
-          value={todoInput}
-          onChange={handleChange}
-          type="text"
-          placeholder="Type your todo..."
-        />
-        {resetVisible && (
-          <button type="button" className="clear" onClick={handleReset}>
-            <svg viewBox="0 0 24 24">
-              <path className="line" d="M2 2L22 22" />
-              <path className="long" d="M9 15L20 4" />
-              <path className="arrow" d="M13 11V7" />
-              <path className="arrow" d="M17 11H13" />
-            </svg>
-          </button>
-        )}
-      </div>
-      <button
-        className="c-todo-input__submit"
-        aria-roledescription="Add Todo"
-        type="button"
-        onClick={handleSubmit}
-      >
-        <BsPlus />
-        <span>Add Todo</span>
-      </button>
-    </form>
+    <>
+      <form className={cx('c-todo-input', className)} onSubmit={handleSubmit}>
+        <div className="c-todo-input__todo">
+          <input
+            value={todoInput}
+            onChange={handleChange}
+            type="text"
+            placeholder="Type your todo..."
+          />
+          {resetVisible && (
+            <button type="button" className="clear" onClick={handleReset}>
+              <svg viewBox="0 0 24 24">
+                <path className="line" d="M2 2L22 22" />
+                <path className="long" d="M9 15L20 4" />
+                <path className="arrow" d="M13 11V7" />
+                <path className="arrow" d="M17 11H13" />
+              </svg>
+            </button>
+          )}
+        </div>
+        <button
+          className="c-todo-input__submit"
+          aria-roledescription="Add Todo"
+          type="button"
+          onClick={handleSubmit}
+        >
+          <BsPlus />
+          <span>Add Todo</span>
+        </button>
+      </form>
+      {error && <pre className="c-warn">Please type your todo</pre>}
+    </>
   );
 };
 

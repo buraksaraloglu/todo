@@ -40,6 +40,7 @@
   box-shadow: inset 0 0 0 var(--border-width, 1px) var(--border, var(--border-default)),
     0 1px 3px var(--shadow, var(--shadow-default));
   transition: box-shadow 0.2s;
+
   &:focus-within {
     --border-width: 1.5px;
     --border: var(--border-active);
@@ -181,4 +182,14 @@
       --b: var(--close-background);
     }
   }
+}
+
+.warn {
+  border: 2px solid tomato;
+  margin-bottom: 0;
+}
+
+.c-warn {
+  margin-top: 0.5rem;
+  color: tomato;
 }
