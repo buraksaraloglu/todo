@@ -5,7 +5,6 @@ import { getTodosByVisibilityFilter } from '../redux/selectors';
 import store from '../redux/store';
 import { fetchTodos } from '../redux/actions';
 
-// eslint-disable-next-line no-unused-vars
 import TodoItem from '../compontents/TodoItem/TodoItem';
 import Loading from '../compontents/Loading';
 
