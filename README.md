@@ -4,14 +4,13 @@ Basic todo app built with MERN stack.
 
 ### Frontend
 
-> Build with: `React, Redux, Redux Thunk`
+> Build with: `React`, `Redux`, `Redux Thunk`
 
 ### Important Specs
 
 - Initial read request is handled by `Redux Thunk`.
 - When all todos are fetched into Redux, future reads and updates are made through Redux.
-- There is a client rate-limit on update. (ex: if client spams the checkbox, there is a time limit to handle the process.)
-- Used proxy in React app to handle API requests by same domain (ex: backend is on port `5000` but you can call `localhost:3000/api/v1/todos`)
+- There is a client rate-limit on update. (ex: if client spams the checkbox, there is a time limit to handle the process).
 - Used axios to handle API requests.
 
 ### Backend
@@ -28,14 +27,16 @@ Basic todo app built with MERN stack.
 
 ## API Reference
 
+API server's repo is [todo-server](https://github.com/buraksaraloglu/todo-server)
+
 If everything set correctly, you should be able to hit a request to
 
 ```shell
-localhost:5000/api/v1/todos
+localhost:6565/api/v1/todos
 ```
 
 All CRUD operations are handled by this router.
 
 ## Other Details
 
-You can check backend repo at:
+You can check backend repo at: [todo-server](https://github.com/buraksaraloglu/todo-server)
