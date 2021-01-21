@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
 import { addTodo } from '../../redux/actions';
 
-import { Loading } from '../Loading';
+import Loading from '../Loading';
 
 import './c-todo-input.scss';
 
