@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
 import { addTodo } from '../../redux/actions';
 
+import { Loading } from '../Loading';
+
 import './c-todo-input.scss';
 
 const TodoInput = ({ addTodo }) => {
@@ -15,6 +17,7 @@ const TodoInput = ({ addTodo }) => {
   const [resetVisible, setResetVisible] = useState(false);
   const [error, setError] = useState('');
   const [className, setClassName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,13 +27,20 @@ const TodoInput = ({ addTodo }) => {
     }
 
     if (todoInput) {
+      setIsLoading(true);
       axios
         .post('https://bs-todo-server.herokuapp.com/api/v1/todos/', { content: todoInput })
         .then((res) => {
-          const itemId = res.data._id;
-          addTodo({ ...res.data, id: itemId });
+          if (res.status === 200) {
+            setIsLoading(false);
+            const itemId = res.data._id;
+            addTodo({ ...res.data, id: itemId });
+          }
         })
-        .catch((error) => setError(error));
+        .catch((error) => {
+          setIsLoading(false);
+          setError(error);
+        });
       setTodoInput('');
     }
   };
@@ -84,7 +94,8 @@ const TodoInput = ({ addTodo }) => {
           <span>Add Todo</span>
         </button>
       </form>
-      {error && <pre className="c-warn">{error}</pre>}
+      {error && !isLoading && <pre className="c-warn">{error}</pre>}
+      {isLoading && <Loading />}
     </>
   );
 };
