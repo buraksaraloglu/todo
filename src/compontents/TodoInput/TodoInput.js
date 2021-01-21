@@ -13,13 +13,13 @@ import './c-todo-input.scss';
 const TodoInput = ({ addTodo }) => {
   const [todoInput, setTodoInput] = useState('');
   const [resetVisible, setResetVisible] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
   const [className, setClassName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!todoInput) {
-      setError(true);
+      setError('Please type your todo.');
       setClassName('warn');
     }
 
@@ -84,7 +84,7 @@ const TodoInput = ({ addTodo }) => {
           <span>Add Todo</span>
         </button>
       </form>
-      {error && <pre className="c-warn">Please type your todo</pre>}
+      {error && <pre className="c-warn">{error}</pre>}
     </>
   );
 };
