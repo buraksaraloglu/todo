@@ -30,7 +30,7 @@ const TodoInput = ({ addTodo }) => {
           const itemId = res.data._id;
           addTodo({ ...res.data, id: itemId });
         })
-        .catch((error) => new Error(error));
+        .catch((error) => setError(error));
       setTodoInput('');
     }
   };
