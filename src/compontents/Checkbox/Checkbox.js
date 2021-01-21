@@ -5,7 +5,7 @@ import './c-checkbox.scss';
 
 const Checkbox = ({ onCheck, isChecked = false }) => (
   <label className="checkbox">
-    <input type="checkbox" onClick={onCheck} defaultChecked={isChecked} />
+    <input type="checkbox" onClick={onCheck} checked={isChecked} />
     {isChecked && (
       <>
         <svg viewBox="0 0 21 18">
