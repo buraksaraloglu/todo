@@ -95,7 +95,11 @@ const TodoInput = ({ addTodo }) => {
         </button>
       </form>
       {error && !isLoading && <pre className="c-warn">{error}</pre>}
-      {isLoading && <Loading />}
+      {isLoading && (
+        <div style={{ display: 'flex' }}>
+          <Loading />
+        </div>
+      )}
     </>
   );
 };
