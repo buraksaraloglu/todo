@@ -12,8 +12,10 @@ const useUpdateTodo = (todo, completed, status, setStatus, toggleTodo) => {
             ...todo,
             completed,
           })
-          .then(() => {
-            toggleTodo(todo.id);
+          .then((res) => {
+            if (res.status === 200) {
+              toggleTodo(todo.id);
+            }
           })
           .catch(() => setStatus(null));
         setStatus(null);
